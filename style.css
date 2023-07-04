@@ -1,37 +1,53 @@
-/* Element selector */
-h1 {
-    color: blue;
+/* UNIVERSAL SELECTOR */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ID Selectors */
-#hitme-btn {
-    background-color: green;
-    color: white;
+body {
+  background-color: #fafafa;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #333;
 }
 
-/* Class selector */
-.red-text {
-    color: red;
+nav {
+  background-color: white;
+  height: 54px;
+  border-bottom: #dbdbdb 1px solid;
+  display: flex;
+  justify-content: center;
+}
+.inner-nav {
+  display: flex;
+  /* flex-direction: row; */ /* default */
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 975px;
 }
 
-.btn {
-    background-color: red;
-    color: white;
-    border: none;
-    /* padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 20px;
-    padding-left: 20px; */
-    /* padding: 10px 20px 10px 20px; */
-    padding: 10px 20px;
-    border-radius: 10px;
+.logo {
+  width: 100px;
 }
-
-.box {
-    width: 500px;    
-    height: 100px;
-    /* background-color: blue; */
-    border: 1px solid gray;
-    border-radius: 10px;
-    margin: 20px 0px;
+.search-input {
+    border: 1px solid #dbdbdb;
+    background-color: #fafafa;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+.navbar-icons {
+    display: flex;
+    align-items: center;
+}
+.profile-pic {
+    width: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.margin-left {
+    margin-left: 20px;
 }
