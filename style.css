@@ -1,0 +1,37 @@
+/* Element selector */
+h1 {
+    color: blue;
+}
+
+/* ID Selectors */
+#hitme-btn {
+    background-color: green;
+    color: white;
+}
+
+/* Class selector */
+.red-text {
+    color: red;
+}
+
+.btn {
+    background-color: red;
+    color: white;
+    border: none;
+    /* padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px; */
+    /* padding: 10px 20px 10px 20px; */
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.box {
+    width: 500px;    
+    height: 100px;
+    /* background-color: blue; */
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 20px 0px;
+}
