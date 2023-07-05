@@ -1,3 +1,5 @@
+console.log("OBJECTS");
+
 const post = {
   username: "akhilboddu",
   imageLink:
@@ -10,6 +12,15 @@ const post = {
   createdAt: "2020-02-07T17:00:00.000Z",
 };
 
-// output if the post can be shared or not
-//  if is public, "Post can be shared"
-//  if not public, "Post cannot be shared"
+// Update values in object
+post.likes = 10;
+
+// delete values in object
+delete post.createdAt;
+
+// Access values in object
+console.log(
+  `${post.username} posted "${post.caption}" and got ${post.likes} likes`
+);
+
+console.log("Post", post);
