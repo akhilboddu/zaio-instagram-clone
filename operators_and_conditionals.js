@@ -10,7 +10,7 @@ console.log(10 % 3, 10 % 5);
 // >, <, >=, <=, ==, ===, !=, !==
 const num1 = 10; //number
 const num2 = "10"; //string
-
+const isPublic = false;
 
 // conditional statements
 if (num1 === num2) {
@@ -18,3 +18,12 @@ if (num1 === num2) {
 } else {
   console.log("These numbers are not equal");
 }
+
+// if (isPublic) {
+//   console.log("Post can be shared");
+// } else {
+//   console.log("Post cannot be shared");
+// }
+
+// Ternary operators
+console.log(isPublic ? "Post can be shared" : "Post cannot be shared");
