@@ -1,5 +1,39 @@
-var feed = []; // global property
-console.log("feed", feed);
+// DOM functions
+const searchInput = document.querySelector(".search-input"); // how to access HTML elements in JS
+const searchBtn = document.querySelector("#search-btn");
+const postsDiv = document.querySelector(".posts");
+
+const usernameInput = document.querySelector("#username");
+const imageLinkInput = document.querySelector("#imagelink");
+const captionInput = document.querySelector("#caption");
+const createPostBtn = document.querySelector("#create-post-btn");
+
+console.log("searchInput", searchInput, searchBtn);
+
+// Event Listeners
+searchBtn.addEventListener("click", () => {
+  console.log(searchInput.value);
+  searchInput.style.background = "red";
+});
+createPostBtn.addEventListener("click", () => {
+  console.log("create post btn clicked");
+  createPost(imageLinkInput.value, captionInput.value, usernameInput.value);
+});
+
+var feed = [
+  {
+    id: 0,
+    username: "akhilboddu",
+    imageLink: "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
+    caption: "Sky diving is fun!",
+    likes: 0,
+    comments: [],
+    shares: 0,
+    isPublic: true,
+    createdAt: new Date(),
+  },
+]; // global property
+
 
 // CRUD - Create, Read, Update, Delete
 // CREATING A POST
@@ -15,21 +49,31 @@ const createPost = (imageLink, caption, username) => {
     isPublic: true,
     createdAt: new Date(),
   };
+  console.log("FEED", feed)
   feed.push(newPost);
+  outputFeed();
   // outputFeed(feed);
 };
 
 // READING ALL POSTS
 // array + anonyomous function: map
-const outputFeed = (feed) => {
+const outputFeed = () => {
   // return statuses of the posts
   // map function returns a new array of just the statuses
-  const output = feed.map((p) => {
-    console.log(outputPostStatus(p));
-    return p;
-    // return outputPostStatus(p);
+  const updatedFeed = feed.map((post) => {
+    return `
+    <div class="post">
+      <div class="post-header">
+          <p>${post.username}</p>
+      </div>
+      <img src="${post.imageLink}" alt="">
+      <div class="caption">
+          <p>${post.caption}</p>
+      </div>
+    </div>
+    `;
   });
-  console.log("NEW MAPPED ARRAY: ", output);
+  postsDiv.innerHTML = updatedFeed.join(" ");
 };
 
 // UPDATE POST
@@ -55,7 +99,7 @@ const deletePost = (id) => {
     }
   });
   feed = updatedFeed;
-  outputFeed(feed);
+  // outputFeed(feed);
 };
 
 const outputPostStatus = (post) => {
@@ -73,32 +117,34 @@ const outputPostStatus = (post) => {
 
 // outputFeed(feed);
 // demo of creating a post
-createPost(
-  "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
-  "Sky diving was fun...",
-  "akhilboddu"
-);
-createPost(
-  "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
-  "iX is awesome",
-  "unam"
-);
-createPost(
-  "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
-  "Elon musk owns twitter now...",
-  "elonmusk"
-);
-createPost(
-  "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
-  "Demo object",
-  "demoperson"
-);
-createPost(
-  "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
-  "fruits are delicious",
-  "healthyperson"
-);
+// createPost(
+//   "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
+//   "Sky diving was fun...",
+//   "akhilboddu"
+// );
+// createPost(
+//   "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
+//   "iX is awesome",
+//   "unam"
+// );
+// createPost(
+//   "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
+//   "Elon musk owns twitter now...",
+//   "elonmusk"
+// );
+// createPost(
+//   "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
+//   "Demo object",
+//   "demoperson"
+// );
+// createPost(
+//   "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
+//   "fruits are delicious",
+//   "healthyperson"
+// );
 
-updatePost(2, "www.imagelink.com/imagelink", "SpaceX next launch soon!");
-deletePost(4);
-deletePost(0);
+// updatePost(2, "www.imagelink.com/imagelink", "SpaceX next launch soon!");
+// deletePost(4);
+// deletePost(0);
+
+outputFeed();
