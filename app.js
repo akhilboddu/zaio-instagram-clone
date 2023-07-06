@@ -7,6 +7,13 @@ const usernameInput = document.querySelector("#username");
 const imageLinkInput = document.querySelector("#imagelink");
 const captionInput = document.querySelector("#caption");
 const createPostBtn = document.querySelector("#create-post-btn");
+const editPostBtn = document.querySelector("#edit-post-btn");
+editPostBtn.style.display = "none";
+
+const editBtn = document.querySelector("#edit-btn");
+
+const modal = new bootstrap.Modal(document.getElementById("modal"));
+const showCreateModal = document.querySelector("#show-create-modal");
 
 console.log("searchInput", searchInput, searchBtn);
 
@@ -19,7 +26,22 @@ createPostBtn.addEventListener("click", () => {
   console.log("create post btn clicked");
   createPost(imageLinkInput.value, captionInput.value, usernameInput.value);
 });
+showCreateModal.addEventListener("click", () => {
+  isEditMode = false;
+  createPostBtn.style.display = "block";
+  editPostBtn.style.display = "none";
+  usernameInput.value = "";
+  imageLinkInput.value = "";
+  captionInput.value = "";
+  modal.show();
+});
+editPostBtn.addEventListener("click", () => {
+  console.log("edit post btn clicked");
+  updatePost(postToEditId, imageLinkInput.value, captionInput.value);
+  modal.hide();
+});
 
+// Global variables
 var feed = [
   {
     id: 0,
@@ -33,7 +55,8 @@ var feed = [
     createdAt: new Date(),
   },
 ]; // global property
-
+var isEditMode = false;
+var postToEditId = null;
 
 // CRUD - Create, Read, Update, Delete
 // CREATING A POST
@@ -49,9 +72,10 @@ const createPost = (imageLink, caption, username) => {
     isPublic: true,
     createdAt: new Date(),
   };
-  console.log("FEED", feed)
+  console.log("FEED", feed);
   feed.push(newPost);
   outputFeed();
+  modal.hide();
   // outputFeed(feed);
 };
 
@@ -65,6 +89,7 @@ const outputFeed = () => {
     <div class="post">
       <div class="post-header">
           <p>${post.username}</p>
+          <button class="btn btn-sm btn-primary" onclick="showEditPostModal(${post.id})">Edit</button>
       </div>
       <img src="${post.imageLink}" alt="">
       <div class="caption">
@@ -88,6 +113,7 @@ const updatePost = (id, newImageLink, newCaption) => {
     return post;
   });
   feed = updatedFeed;
+  outputFeed();
 };
 
 // DELETE POST
@@ -111,6 +137,19 @@ const outputPostStatus = (post) => {
   Caption: ${post.caption}
   `;
   return output;
+};
+
+const showEditPostModal = (id) => {
+  postToEditId = id;
+  isEditMode = true;
+  createPostBtn.style.display = "none";
+  editPostBtn.style.display = "block";
+  const postToEdit = feed[id];
+  console.log("postToEdit", postToEdit);
+  usernameInput.value = postToEdit.username;
+  imageLinkInput.value = postToEdit.imageLink;
+  captionInput.value = postToEdit.caption;
+  modal.show();
 };
 
 // IMPLEMENTATION

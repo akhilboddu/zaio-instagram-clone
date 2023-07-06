@@ -69,3 +69,9 @@ nav {
 .post img {
   width: 100%;
 }
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  justify-content: space-between;
+}
