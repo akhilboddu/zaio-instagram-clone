@@ -42,22 +42,22 @@ editPostBtn.addEventListener("click", () => {
 });
 
 // Global variables
-var feed = [
-  {
-    id: 0,
-    username: "akhilboddu",
-    imageLink: "https://frabjous-pavlova-ebea4c.netlify.app/assets/post.png",
-    caption: "Sky diving is fun!",
-    likes: 0,
-    comments: [],
-    shares: 0,
-    isPublic: true,
-    createdAt: new Date(),
-  },
-]; // global property
+var feed = []; // global property
 var isEditMode = false;
 var postToEditId = null;
 
+const uploadPostToFirebase = (post) => {
+  console.log("FIREBASE DB", db);
+  db.collection("posts")
+    .doc(post.id + "")
+    .set(post)
+    .then(() => {
+      console.log("POST UPLOADED TO FIREBASE");
+    })
+    .catch((error) => {
+      console.log("ERROR", error);
+    });
+};
 // CRUD - Create, Read, Update, Delete
 // CREATING A POST
 const createPost = (imageLink, caption, username) => {
@@ -73,6 +73,7 @@ const createPost = (imageLink, caption, username) => {
     createdAt: new Date(),
   };
   console.log("FEED", feed);
+  uploadPostToFirebase(newPost);
   feed.push(newPost);
   outputFeed();
   modal.hide();

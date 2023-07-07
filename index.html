@@ -63,7 +63,8 @@
                         draggable="false" src="assets/akhil.png" />
                 </div>
                 <div>
-                    <button id="show-create-modal" type="button" class="btn btn-sm btn-primary margin-left">Create Post</button>
+                    <button id="show-create-modal" type="button" class="btn btn-sm btn-primary margin-left">Create
+                        Post</button>
                 </div>
             </div>
 
@@ -110,12 +111,42 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button id="create-post-btn" type="button" class="btn btn-primary" >Create Post</button>
+                    <button id="create-post-btn" type="button" class="btn btn-primary">Create Post</button>
                     <button id="edit-post-btn" type="button" class="btn btn-primary margin-left">Edit Post</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCZhSGW0D4niudd-_JBmneHfPAK8nbIVfc",
+            authDomain: "ix-insta-clone-final.firebaseapp.com",
+            projectId: "ix-insta-clone-final",
+            storageBucket: "ix-insta-clone-final.appspot.com",
+            messagingSenderId: "690609992495",
+            appId: "1:690609992495:web:f828468e26197523a067da"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        console.log(db)
+    </script>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -124,7 +155,6 @@
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
         crossorigin="anonymous"></script>
     <script src="app.js"></script>
-    <script src="playground.js"></script>
     <!-- <script src="variables.js"></script> -->
     <!-- <script src="arrays.js"></script> -->
     <!-- <script src="objects.js"></script> -->
