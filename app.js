@@ -8,6 +8,7 @@ const imageLinkInput = document.querySelector("#imagelink");
 const captionInput = document.querySelector("#caption");
 const createPostBtn = document.querySelector("#create-post-btn");
 const editPostBtn = document.querySelector("#edit-post-btn");
+const logoutBtn = document.querySelector("#logout-btn");
 editPostBtn.style.display = "none";
 
 const editBtn = document.querySelector("#edit-btn");
@@ -40,6 +41,9 @@ editPostBtn.addEventListener("click", () => {
   updatePost(postToEditId, imageLinkInput.value, captionInput.value);
   modal.hide();
 });
+logoutBtn.addEventListener("click", () => {
+  handleLogout();
+});
 
 // Global variables
 var feed = []; // global property
@@ -47,7 +51,6 @@ var isEditMode = false;
 var postToEditId = null;
 
 const uploadPostToFirebase = (post) => {
-  console.log("FIREBASE DB", db);
   db.collection("posts")
     .doc(post.id + "")
     .set(post)
@@ -58,6 +61,19 @@ const uploadPostToFirebase = (post) => {
       console.log("ERROR", error);
     });
 };
+
+const getPostsFromFirebase = () => {
+  db.collection("posts")
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data());
+        feed.push(doc.data());
+        outputFeed();
+      });
+    });
+};
+
 // CRUD - Create, Read, Update, Delete
 // CREATING A POST
 const createPost = (imageLink, caption, username) => {
@@ -114,6 +130,7 @@ const updatePost = (id, newImageLink, newCaption) => {
     return post;
   });
   feed = updatedFeed;
+  uploadPostToFirebase(feed[id]);
   outputFeed();
 };
 
@@ -154,7 +171,8 @@ const showEditPostModal = (id) => {
 };
 
 // IMPLEMENTATION
-
+outputFeed();
+getPostsFromFirebase();
 // outputFeed(feed);
 // demo of creating a post
 // createPost(
@@ -186,5 +204,3 @@ const showEditPostModal = (id) => {
 // updatePost(2, "www.imagelink.com/imagelink", "SpaceX next launch soon!");
 // deletePost(4);
 // deletePost(0);
-
-outputFeed();
